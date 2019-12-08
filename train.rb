@@ -18,11 +18,11 @@ class Train
   end
 
   def show_speed
-    puts @speed
+    puts "Current speed is #{@speed}."
   end
 
   def show_cars_quant
-    puts @cars_quant
+    puts "Cars quantity is #{@cars_quant}."
   end
 
   def add_cars
@@ -34,27 +34,18 @@ class Train
   end
 
   def take_route(route)
-    @current_station = @depart
-    @current_station.add_train(self)
+    @current_station = route.depart
+    puts "The train #{@train_number} is currently in #{@current_station.station_name}."
+    route.depart.receive_train(self)
   end
 
-  def move(where)
+  def move_forward
     @current_station.send_train(self)
 
+    route.stations.each.with_index(1) do |station, index|
 
-    @stations.each.with_index(1) do |station, index|
-      @forward = @stations[index + 1]
-      @back = @stations[index - 1]
-    end
-    if where == "forward"
-      @location = @forward 
-      @station.trains.delete(@number)
-      @stations[index + 1].trains << @number
-    elsif where == "back"
-    @location = @back
-    @station.trains.delete(@number)
-    @stations[index - 1].trains << @number
-    else puts "Error"
+    @current_station = route.stations[index + 1]
+    route.stations[index + 1].receive_train(self)
     end
   end
 end
