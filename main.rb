@@ -29,4 +29,10 @@ train1.delete_cars
 
 train1.take_route(route1)
 
-train1.move_forward
+train1.next_station
+
+train1.prev_station
+
+station1.show_trains
+
+station2.show_trains

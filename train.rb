@@ -1,10 +1,10 @@
 class Train
   attr_accessor :speed
-  attr_reader :current_station, :previous_station, :next_station, :location
+  attr_reader :current_station, :previous_station, :next_station, :route, :train_number, :train_type
 
-  def initialize(number, type, cars_quant)
+  def initialize(number, train_type, cars_quant)
     @train_number = number
-    @type = type
+    @train_type = train_type
     @cars_quant = cars_quant
 
   end
@@ -34,20 +34,28 @@ class Train
   end
 
   def take_route(route)
-    @current_station = route.depart
+    @route = route
+    @current_station = @route.depart
     puts "The train #{@train_number} is currently in #{@current_station.station_name}."
-    route.depart.receive_train(self)
+    @route.depart.receive_train(self)
   end
 
-  def move_forward
+  def next_station
     @current_station.send_train(self)
-
-    route.stations.each.with_index(1) do |station, index|
-
-    @current_station = route.stations[index + 1]
-    route.stations[index + 1].receive_train(self)
-    end
+    i = @route.stations.index(@current_station)
+    @current_station = @route.stations[i + 1]
+    @route.stations[i + 1].receive_train(self)
+    puts "The train #{@train_number} is currently in #{@current_station.station_name}."
   end
+
+  def prev_station
+    @current_station.send_train(self)
+    i = @route.stations.index(@current_station)
+    @current_station = @route.stations[i - 1]
+    @route.stations[i - 1].receive_train(self)
+    puts "The train #{@train_number} is currently in #{@current_station.station_name}."
+  end
+
 end
 
 
