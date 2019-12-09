@@ -29,9 +29,9 @@ train1.delete_cars
 
 train1.take_route(route1)
 
-train1.next_station
+train1.forward
 
-train1.prev_station
+train1.backward
 
 train2 = Train.new(345, "Freight", 3)
 train2.take_route(route1)
