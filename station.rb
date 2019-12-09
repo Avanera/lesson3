@@ -1,8 +1,8 @@
 class Station
-  attr_reader :trains, :station_name, :train_type
+  attr_reader :trains, :name
 
   def initialize(name)
-    @station_name = name
+    @name = name
     @trains = []
   end
 
@@ -14,10 +14,10 @@ class Station
     @trains.delete(train)
   end
 
-  def show_trains
+  def show_trains(type)
     @trains.each do |train|
-      puts "Passenger trains: #{train}" if train.train_type == "Passenger"
-      puts "Freight trains: #{train}" if train.train_type == "Freight"
+      puts "Passenger trains: #{train.number}" if train.type == "Passenger" && type == train.type
+      puts "Freight trains: #{train.number}" if train.type == "Freight" && type == train.type
     end
   end
 

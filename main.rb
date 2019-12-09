@@ -33,6 +33,9 @@ train1.next_station
 
 train1.prev_station
 
-station1.show_trains
+train2 = Train.new(345, "Freight", 3)
+train2.take_route(route1)
 
-station2.show_trains
+station1.show_trains("Passenger")
+station1.show_trains("Freight")
+station2.show_trains("Passenger")

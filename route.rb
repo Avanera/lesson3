@@ -8,18 +8,17 @@ class Route
   end
 
   def add_station(station)
-    @stations.pop()
-    @stations << station
-    @stations << @arrive
+    @stations.insert(-2, station) # добавить элемент в любое место массива
   end
 
   def delete_station(station)
-    @stations.delete(station)
+    @stations.delete(station) if station != @depart && station != @arrive
   end
 
   def show_stations
-    @stations.each do |station|
-      puts "Stations list: #{station.station_name}."
+    puts "Route 1:"
+    @stations.each.with_index(1) do |station, index|
+      puts "Station #{index}: #{station.name}."
     end
   end
 end
